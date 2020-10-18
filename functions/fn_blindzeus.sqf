@@ -157,6 +157,7 @@ private _bum_fnc_curatorModuleActions = {
             };
         };
     }];
+    
     private _fnc_handleCuratorDialogs = {
         private _dialogClass = findDisplay -1 getVariable "BIS_fnc_initDisplay_configClass";
         if ("achilles_ui_f" in activatedAddons) then //we need to hide stuff from achilles if its on.
@@ -176,6 +177,7 @@ private _bum_fnc_curatorModuleActions = {
     };
 
     private _fnc_addCuratorMapEH = {
+        //Prevent changing mouse icon in map when over objects that arent editable
         ((findDisplay 312) displayCtrl 50) ctrlAddEventHandler ["Draw",{
             if (curatorMouseOver select 0 == "OBJECT") then {
                 if !((curatormouseOver select 1) in curatorEditableObjects (getAssignedCuratorLogic player)) then {
@@ -188,6 +190,7 @@ private _bum_fnc_curatorModuleActions = {
             };
         }];
 
+        //Prevent editing objects that arent editable, in map
         ((findDisplay 312) displayCtrl 50) ctrlAddEventHandler ["MouseButtonDblClick",{
             if (curatorMouseOver select 0 in "OBJECT") then {
                 if !((curatormouseOver select 1) in curatorEditableObjects (getAssignedCuratorLogic player)) then {
